@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>26. 鼠标滚轮</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 500px;
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body style="height: 5000px">
+
+<div id="box"></div>
+
+
+<script>
+    // 大部分浏览器兼容方式，监听事件:
+    function bind (obj, eventStr, callback){
+        if(obj.addEventListener){
+            obj.addEventListener(eventStr,callback,false)
+        }else{
+            obj.attachEvent("on"+eventStr,function () {
+                callback.call(obj);
+            })
+        }
+    }
+
+    var box=document.getElementById("box");
+    //    bind(box,"DOMMouseScroll",function () {}) 比较下一行代码
+    bind(box,"DOMMouseScroll",box.onmousewheel);
+    box.onmousewheel=function (event) {  //判断滚轮方向
+        event= event || window.event;
+        if(event.wheelDelta>0 || event.detail<0){
+            box.style.height=box.clientHeight-50+"px";
+        }else{
+            box.style.height=box.clientHeight+50+"px";
+        }
+//        去默认行为：
+        // 使用addEventListenner()方法绑定响应函数，取消默认行为不能用return false；
+        event.preventDefault&&event.preventDefault(); //这里前半句判断有无,用且连接
+        return false; //去浏览器默认行为：当浏览器有滚轮时，滚轮滚动页面下滑
+
+
+    };
+
+
+
+
+
+</script>
+</body>
+</html>

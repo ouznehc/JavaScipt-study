@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19. JS基础增加删改记录</title>
+</head>
+<body>
+
+<div style="width: 500px; margin: 200px auto ;">
+
+    <table id="employeeTable" style="border: solid 1px;width:
+    800px;table-layout: fixed;border-collapse: collapse;" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>6000</td>
+            <td><a href="javascript:">Delete</a></td> <!--herf属性改变使它不跳转-->
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>JJ@jerry.com</td>
+            <td>5500</td>
+            <td><a href="javascript:">Delete</a></td>
+        </tr>
+        <tr>
+            <td>BOB</td>
+            <td>BOB@qq123456.com</td>
+            <td>6600</td>
+            <td><a href="javascript:">Delete</a></td>
+        </tr>
+    </table>   <!--创建基本表-->
+    <div style=" margin-top: 50px;">
+        <h4>添加新员工</h4>
+        <table>
+            <tr>
+                <td class="word">name:</td>
+                <td class="inp">
+                    <input type="text" name="empName" id="empName"  />
+                </td>
+            </tr>
+            <tr>
+                <td class="word">email:</td>
+                <td class="inp">
+                    <input type="text" name="email" id="email" />
+                </td>
+            </tr>
+            <tr>
+                <td class="word">salary:</td>
+                <td class="inp">
+                    <input type="text" name="salary" id="salary" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" >
+                    <button id="addEmpButton" >Submit</button>
+                </td>
+            </tr>
+        </table>
+    </div>  <!--input输入信息-->
+
+</div>
+
+<script>
+
+    //Delete功能：
+    function del() {
+        tr = this.parentNode.parentNode;
+        var name = tr.getElementsByTagName("td")[0].innerHTML;//找到获取到name
+        var flag = confirm("是否删除" + name + "?");
+        if (flag) {
+            tr.parentNode.removeChild(tr);//自己删除自己
+        }
+    }
+    var ALLa=document.getElementsByTagName("a");
+    for(i=0;i<ALLa.length;i++){
+        ALLa[i].onclick=del;
+    }
+    //Submit添加：
+    var submit=document.getElementById("addEmpButton");
+    submit.onclick=function () {
+        var tr=document.createElement("tr");
+        var name=document.getElementById("empName").value;
+        var email=document.getElementById("email").value;
+        var salary=document.getElementById("salary").value;
+        tr.innerHTML=
+            "<td>"+name+"</td>"+
+            "<td>"+email+"</td>"+
+            "<td>"+salary+"</td>"+
+            "<td><a href='javascript:'>Delete</a></td>";
+        var a=tr.getElementsByTagName("a")[0];
+        a.onclick=del;
+        var employeeTable=document.getElementById("employeeTable");
+        var tbody=employeeTable.getElementsByTagName("tbody")[0];
+        tbody.appendChild(tr);
+    };
+
+    //添加一个empty按钮 清空输入内容？？
+
+</script>
+
+</body>
+</html>

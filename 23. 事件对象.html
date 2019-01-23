@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>23. 事件对象</title>
+    <style>
+
+        #areaDiv{
+            height: 200px;
+            width: 500px;
+            border: solid 1px;
+        }
+        #showMsg{
+            margin: 50px;
+            height: 30px;
+            width: 200px;
+            border:solid 1px;
+        }
+        #box{
+            height: 50px;
+            width: 50px;
+            background-color: black;
+            position: absolute;
+        }
+
+        #box2{
+            height: 500px;
+            width: 500px;
+            background-color: seashell;
+        }
+    </style>
+</head>
+<body style="height: 2000px ; width: 2000px">
+
+<div id="areaDiv"></div>
+<div id="showMsg"></div>
+<div id="box"></div>
+<div id="box2"></div>
+<script>
+    var areaDiv=document.getElementById("areaDiv");
+    var showMsg=document.getElementById("showMsg");
+//    鼠标坐标:
+    areaDiv.onmousemove=function (event) {
+        event=event  ||  window.event;// 返回true的那一个即返回有的那个
+        var x=event.clientX;
+        var y=event.clientY;
+        showMsg.innerHTML="x="+x+", y="+y;
+    };
+
+//    div跟随：
+
+    var box=document.getElementById("box");
+    document.onmousemove=function (event) {
+        var st=document.body.scrollTop||document.documentElement.scrollTop;
+        var sl=document.body.scrollLeft||document.documentElement.scrollLeft;
+        var left=event.clientX;
+        var top=event.clientY;
+         box.style.left=left+sl+"px";  // 设置位置必须开起定位
+         box.style.top=top+st+"px";
+         console.log(st);
+         console.log(sl);
+    };
+
+    // 事件的冒泡
+    var box2=document.getElementById("box2");
+    box2.onmousemove=function(event){
+        event=event || window.event;
+        event.cancelBubble=true;
+    }
+
+</script>
+
+</body>
+</html>

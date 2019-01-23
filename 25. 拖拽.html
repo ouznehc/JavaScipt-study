@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25. 拖拽</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 100px;
+            position: fixed;
+            background-color: black;
+        }
+    </style>
+</head>
+<body style="height: 3000px">
+<div id="box"></div>
+
+
+<script>
+    //鼠标被按下：
+    var box=document.getElementById("box");
+    box.onmousedown=function (event) {
+        // 偏移量设置
+        event=event || window.event;
+        var ol=event.clientX-box.offsetLeft;
+        var ot=event.clientY-box.offsetTop;
+
+
+
+        //鼠标移动：
+        document.onmousemove=function (event) {
+          event=event || window.event;
+          var left=event.clientX-ol;
+          var top=event.clientY-ot;
+          box.style.left=left+"px";
+          box.style.top=top+"px";
+        };
+        //鼠标被松开
+        document.onmouseup=function () { //这里给document绑定更好，不怕遮挡
+            document.onmousemove=null;
+            document.onmouseup=null;   //一定要取消
+        };
+    };
+
+
+
+
+</script>
+
+</body>
+</html>

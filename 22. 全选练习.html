@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>22. 全选练习</title>
+    <style>
+        .box{
+            border: solid 1px;
+            height: 300px;
+            width: 500px;
+            margin:100px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <form method="post" action="">
+        <p>你爱好的运动是？</p>
+        <input type="checkbox" id="checkAllBox"/>全选/全不选
+        <br/><br/><br/>
+        <input type="checkbox" name="item" value="足球" />足球
+        <input type="checkbox" name="item" value="篮球"/>篮球
+        <input type="checkbox" name="item" value="羽毛球"/>羽毛球
+        <input type="checkbox" name="item" value="乒乓"/>乒乓
+        <br/><br/>
+
+        <input type="button" id="checkedAllBtn" value="全选"/>
+        <input type="button" id="checkedNoBtn" value="全不选"/>
+        <input type="button" id="checkedRevBtn" value="反选"/>
+        <input type="button" id="sendBtn" value="提交"/>
+    </form>
+</div>
+
+<script>
+    var items=document.getElementsByName("item");
+    // 全选
+    var checkedAllBtn=document.getElementById("checkedAllBtn");
+    checkedAllBtn.onclick=function(){
+        for (i=0;i<items.length;i++){
+            items[i].checked=true;
+        }
+        checkAllBox.checked=true;
+    };
+    //全不选
+    var checkedNoBtn=document.getElementById("checkedNoBtn");
+    checkedNoBtn.onclick=function(){
+        for (i=0;i<items.length;i++){
+            items[i].checked=false;
+        }
+        checkAllBox.checked=false;
+    };
+
+    //反选
+    var checkedRevBtn=document.getElementById("checkedRevBtn");
+    checkedRevBtn.onclick=function () {
+        for (i=0;i<items.length;i++){
+            items[i].checked=!items[i].checked; //取反操作 不用判断
+            }
+        checkAllBox.checked=items[0].checked;
+        //当点击反选时就把items[0]的状态赋值给checkAllBox
+    };
+
+    //提交
+    var sendBtn=document.getElementById("sendBtn");
+    sendBtn.onclick=function(){
+        var choose=[];
+        for (i=0;i<items.length;i++){
+            if(items[i].checked){
+               choose.push(items[i].value);
+            }
+        }
+        alert(choose);
+    };
+
+    //全选与全不选复选框的响应
+    var checkAllBox=document.getElementById("checkAllBox");
+    checkAllBox.onclick=function () {
+       for(i=0;i<items.length;i++){
+           items[i].checked=this.checked; //this === checkAllBox
+       }
+    };
+
+    for (i=0;i<items.length;i++) {
+        items[i].onclick=function(){
+            checkAllBox.checked=true;
+            //一定在循环里要先设置选中，否则再次点击就出现问题因为只设置了false
+          for(j=0;j<items.length;j++){
+              if(!items[j].checked){
+                  checkAllBox.checked=false;
+                  break;
+              }
+          }
+        };
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>20. 获取元素样式</title>
+    <style>
+        #box{
+            width: 200px;
+            height:200px;
+            padding: 50px;
+            margin: 20px;
+            border: 10px solid red;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">获取样式</button>
+<div id="box">
+    width:200px;
+    Height:200px;
+    Padding:50px;
+    Margin:20px;
+    Border:10px;
+</div>
+<div></div>
+
+<script>
+    //  alert(box.currentStyle.width);   只有IE支持currentStyle
+    // var style=getComputedStyle(box,null); alert(style.width);  返回了整个样式对象object
+    //通过currentStyle 和 getComputedStyle（）读取的样式都是只读
+    var box=document.getElementById("box");
+    var btn = document.getElementById("btn");
+    btn.onclick=function () {
+        console.log("getstyle:"+getstyle(box,"width"));//内部
+        console.log("clientWidth:"+box.clientWidth );//可见区域：内边距以及以内
+        console.log("offsetWidth:"+box.offsetWidth );//边框以及以内
+    };
+    function getstyle(obj,name){
+        if(window.getComputedStyle){ //不加window是变量找不着就报错，加了window是属性找不到就返回undefined；
+            return getComputedStyle(obj,null)[name]; //这里采用[]传入参数，如果使用.name就固定了只能得到name属性
+        }else{
+            return obj.currentStyle[name];
+        }
+    }
+
+</script>
+
+</body>
+</html>

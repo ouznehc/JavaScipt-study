@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>21. 滚动条到底练习</title>
+    <style>
+        #info{
+            height: 500px;
+            width:500px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h3>请阅读注册条款</h3>
+    <p id="info">
+        Lorem ipsum dolor sit amet, consecteturadipisicing elit. Aliquam animi aperiam atque blanditiis expedita illummaxime nam neque nesciunt nulla placeat,possimus provident quo reiciendis repellat reprehenderit ut vitae voluptate.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperioresassumenda autem culpa cum delectus, ducimus eaque eveniet expedita fugit impeditmolestiae nostrum perspiciatis quibusdam quisquam, sequi sint ullam ut velit!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias corporis cumque debitis deserunt dicta distinctio ea eveniet exercitationem explicabo facere ipsam laudantium magni maiores, neque nobis officiis quas, tenetur vero.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, aspernatur assumenda consequatur, doloribus eaque eligendi error eum fugit in ipsa molestias non officiis suscipit ullam ut velit veniam voluptas voluptate.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem dolorem, illum ipsum laborum necessitatibus neque nihil nulla, placeat quibusdam quidem repudiandae sunt, voluptatibus? Consequatur explicabo facilis nesciunt odit quisquam.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquam architecto, debitis delectus dicta eveniet fugiat harum ipsum itaque libero magni, omnis qui quisquam repudiandae sint soluta ut vel?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, molestiae, tempore! Accusamus cupiditate debitis deserunt expedita id placeat praesentium quaerat quos sequi ut? Enim incidunt, nisi officia quam sit suscipit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet, autem esse expedita fugiat laudantium magni, necessitatibus nisi nobis pariatur possimus provident quaerat, quasi quis quos sequi suscipit vero voluptatem?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto atque et fugiat fugit, laudantium minus natus, non optio quaerat quos reprehenderit suscipit tempore? Architecto commodi debitis, explicabo non porro quis.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores autem consequuntur delectus ea molestias optio possimus! At culpa deleniti dolores eveniet impedit ratione, repellendus! Deserunt fuga molestias necessitatibus recusandae temporibus.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur fuga libero optio ratione repellendus similique tempora. Debitis expedita iure libero optio perferendis porro! Assumenda est, excepturi illum nulla vero voluptas.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad assumenda corporis ex officia praesentium quidem recusandae. Consectetur ea enim esse est expedita laborum maxime nam nisi ut, voluptatem.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aliquid deleniti, eligendi harum laboriosam magnam molestiae neque repellendus saepe! Earum fuga nesciunt repellendus repudiandae? Aliquid ducimus illum incidunt nisi!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias, animi consequuntur dolore et expedita facere illum modi mollitia nemo omnis placeat porro quam qui quis reprehenderit, rerum sint tempore?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. In optio qui sed! Et quod saepe totam. Assumenda debitis dolor eius fuga in maxime modi perspiciatis quisquam reiciendis rem, reprehenderit repudiandae?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, consequatur, magni. Ad deleniti eius enim harum in, ipsam numquam porro rerum voluptatibus? Magnam mollitia nisi, quae sed ullam voluptatem. Rem?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet asperiores cumque, deserunt eaque eligendi fuga hic illum in libero magni minima natus quam repellendus, sint tempore ut vel vero!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corporis eaque iusto optio placeat quasi sapiente. Accusamus dolore, eaque earum, incidunt itaque nobis porro rerum, sequi sint soluta totam vero?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid provident quod soluta. Beatae commodi, culpa eius ipsam ipsum labore nihil perspiciatis, quibusdam repellendus, sequi sit vel veniam vero? Eveniet, reprehenderit.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus alias, assumenda cum, delectus deserunt dolore eveniet explicabo harum, illo inventore ipsum magnam molestiae officia praesentium quas quod recusandae similique.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi aperiam dignissimos, dolorem excepturi fugit impedit laudantium magni quae veritatis. Ad, amet et eveniet facilis fugit harum laudantium minima soluta!
+    </p>
+    <input type="checkbox" disabled="disabled" />我已仔细阅读协议，一定遵守。
+    <input type="submit" value="注册" disabled="disabled" />
+
+    <script>
+        var info=document.getElementById("info");
+        var inputs=document.getElementsByTagName("input");
+        info.onscroll=function () {
+            if(info.scrollHeight-info.scrollTop === info.clientHeight){
+                inputs[0].disabled=false;
+            }
+        };
+
+
+        inputs[0].onclick= function () {
+            inputs[1].disabled=false;
+            if(!inputs[0].checked){
+                inputs[1].disabled=true;
+            }
+        };
+//  错误：只进行了false的赋值，只要点击了就是false
+//        inputs[0].onclick= function () {
+//            if(inputs[0].checked){
+//                inputs[1].disabled=false;
+//            }
+//        };
+
+        inputs[1].onclick=function () {
+            alert("注册成功");
+        }
+    </script>
+</body>
+</html>

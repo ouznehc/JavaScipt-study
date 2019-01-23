@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>24. 事件的委派</title>
+</head>
+<body>
+
+<button id="btn">
+    添加链接
+</button>
+<ul style="background: #ccc;" id="ul">
+    <li><a href="javascript:;"class="link">链接1</a></li>
+    <li><a href="javascript:;"class="link">链接2 </a></li>
+    <li><a href="javascript:;"class="link">链接3</a></li>
+    <li><a href="javascript:;"class="link">链接4</a></li>
+</ul>
+
+<script>
+    // 事件的委派：将事件统一绑给元素共同的祖先元素，这样当后代元素上的事件触发，会冒泡到祖先
+    //      从而通过祖先元素的响应函数来处理事件，事件委派利用冒泡，减少绑定次数提高程序性能
+
+    var ul=document.getElementById("ul");
+    var btn=document.getElementById("btn");
+    btn.onclick=function(){
+        var li=document.createElement("li");
+        li.innerHTML="<a href='javascript:;' class=\"link\">新链接</a>";
+        ul.appendChild(li);
+    }
+
+    // 绑定单击响应函数
+    // 点击a链接冒泡到li 再冒泡到ul再响应ul单机事件
+    ul.onclick=function (event) {
+        event=event || window.event;
+        if(event.target.className === "link" ){
+            alert("hi,我是ul单击响应函数");
+        }
+    };
+
+</script>
+
+</body>
+</html>
