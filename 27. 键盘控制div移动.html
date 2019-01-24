@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>27. 键盘控制移动</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 100px;
+            background-color: black;
+            position: absolute;
+        }                                       /*一定要定位*/
+
+    </style>
+</head>
+<body>
+<div id="box">
+</div>
+
+<script>
+    document.onkeydown=function (event) {
+        event=event||window.event;
+        var box=document.getElementById("box");
+        switch(event.keyCode){
+            case 37:
+                box.style.left=box.offsetLeft-100+"px";
+                break;
+            case 38:
+                box.style.top=box.offsetTop-100+"px";
+                break;
+            case 39:
+                box.style.left=box.offsetLeft+100+"px";
+                break;
+            case 40:
+                box.style.top=box.offsetTop +100+"px";
+                break;
+
+        }
+    }
+</script>
+</body>
+</html>

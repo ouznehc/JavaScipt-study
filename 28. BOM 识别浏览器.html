@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>28. BOM 识别浏览器</title>
+</head>
+<body>
+
+<script>
+    var ua=navigator.userAgent;
+    console.log(ua);
+    if(/firefox/i.test(ua)){
+        alert("火狐浏览器");
+    }else if(/Chrome/i.test(ua)){
+        alert("谷歌浏览器");
+    }else if(/msie/i.test(ua)){
+        alert("IE浏览器");
+    }else if("ActiveXobject" in window){
+        alert("IE11浏览器");
+    }
+</script>
+
+</body>
+</html>
