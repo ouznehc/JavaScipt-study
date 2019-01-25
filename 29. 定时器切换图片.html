@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    </style>
+</head>
+<body>
+<img src="img/1.jpg" id="img">
+<br/><br/>
+<button id="btn">start</button>
+<button id="btn2">stop</button>
+<script>
+    var btn=document.getElementById("btn");
+    var btn2=document.getElementById("btn2");
+    var imgArr=["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg"];
+    var img=document.getElementById("img");
+    var index=0;
+    var time;
+    // 开始：
+    btn.onclick=function () {
+        clearInterval(time);        //开起一个定时器要关闭上一个不然会叠加
+        time= setInterval(function () {
+            index++;
+            img.src=imgArr[index%imgArr.length];
+        },500)
+    };
+    // 停止：
+    btn2.onclick=function () {
+        clearInterval(time);
+    };
+
+
+
+</script>
+
+</body>
+</html>

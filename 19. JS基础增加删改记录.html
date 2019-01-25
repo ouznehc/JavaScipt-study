@@ -59,6 +59,7 @@
             <tr>
                 <td colspan="2" align="center" >
                     <button id="addEmpButton" >Submit</button>
+                    <button id="clear" >clear</button>
                 </td>
             </tr>
         </table>
@@ -100,7 +101,13 @@
         tbody.appendChild(tr);
     };
 
-    //添加一个empty按钮 清空输入内容？？
+    //添加一个empty按钮 清空输入内容
+    var clear = document.getElementById("clear");
+    clear.onclick=function () {
+        document.getElementById('empName').value="";
+        document.getElementById('email').value="";
+        document.getElementById('salary').value="";
+    };
 
 </script>
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>30 定时器</title>
+    <style>
+        #box{
+            height: 50px;
+            width: 50px;
+            background: #000;
+            position: absolute;
+            left: 0;
+        }                  /*必须要定位了才有了left距离属性*/
+        #box2{
+            height: 50px;
+            width: 50px;
+            background: silver;
+            position: absolute;
+            left: 0;
+            top: 200px;
+        }
+        #line{
+            width: 0;
+            height: 1000px;
+            border: solid 1px;
+            position: absolute;
+            left: 1000px;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">向右移动</button>
+<button id="btn2">向左移动</button>
+<button id="btn3">变形</button>
+<br/><br/>
+<div id="box"></div>
+<div id="line"></div>
+<div id="box2"></div>
+<script>
+    var box=document.getElementById("box");
+    var btn=document.getElementById("btn");
+    var btn2=document.getElementById("btn2");
+
+    function getStyle(obj,name){
+        if(window.getComputedStyle){ //不加window是变量找不着就报错，加了window是属性找不到就返回undefined；
+            return getComputedStyle(obj,null)[name]; //这里采用[]传入参数，如果使用.name就固定了只能得到name属性
+        }else{
+            return obj.currentStyle[name];
+        }
+    }
+
+//  创建move函数
+//    obj：对象 attr：被改变的样式 target：目标位置  speed：速度
+    function move(obj,attr,target,speed,callback) {
+        clearInterval(obj.timer);
+        var current=parseInt(getStyle(obj,attr));
+        if(current>target){
+            speed=-speed;
+        }
+//       向执行动画的对象中添加属性timer，用来保存定时器的标识
+        obj.timer=setInterval(function () {
+            var oldValue=parseInt(getStyle(obj,attr));
+            var newValue=oldValue+speed;
+            if((speed<0&&newValue<target) || (speed>0&&newValue>target)){
+                newValue=target;
+            }   // 每过一段时间移动固定距离，使最后一步恰好过线
+            obj.style[attr]=newValue+"px";
+//            到达终点:
+            if(newValue===target){
+                clearInterval(obj.timer);
+               callback&&callback();                 //有这个参数才执行，不然没输入参数报错
+            }
+        },30);
+    }
+
+    btn.onclick=function(){
+      move(box,"left",1000,10);
+    };
+    btn2.onclick=function(){
+        move(box,"left",0,10);
+    };
+
+
+//    变形：
+    btn3=document.getElementById("btn3");
+    btn3.onclick=function(){
+      move(box2,"width",700,10,function () {
+          move(box2,"height",500,10,function () {
+              move(box2,"top",0,10);
+          })
+      });
+    };
+
+</script>
+</body>
+</html>

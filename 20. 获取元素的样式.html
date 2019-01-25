@@ -36,6 +36,7 @@
         console.log("clientWidth:"+box.clientWidth );//可见区域：内边距以及以内
         console.log("offsetWidth:"+box.offsetWidth );//边框以及以内
     };
+
     function getstyle(obj,name){
         if(window.getComputedStyle){ //不加window是变量找不着就报错，加了window是属性找不到就返回undefined；
             return getComputedStyle(obj,null)[name]; //这里采用[]传入参数，如果使用.name就固定了只能得到name属性

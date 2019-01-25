@@ -5,8 +5,8 @@
     <title>27. 键盘控制移动</title>
     <style>
         #box{
-            height: 100px;
-            width: 100px;
+            height: 50px;
+            width: 50px;
             background-color: black;
             position: absolute;
         }                                       /*一定要定位*/
@@ -14,29 +14,46 @@
     </style>
 </head>
 <body>
+<p>按住ctrl加速</p>
 <div id="box">
 </div>
 
 <script>
+    var box=document.getElementById("box");
+    var dir=0;
+    var speed=10;
     document.onkeydown=function (event) {
         event=event||window.event;
-        var box=document.getElementById("box");
-        switch(event.keyCode){
+        dir=event.keyCode;
+        if(event.ctrlKey){
+            speed=50;
+        }else{
+            speed=10;
+        }
+    };
+    document.onkeyup=function () {
+        dir=0;
+    };
+
+//    每隔30毫秒判断移动方向 这样可以不卡顿一下
+    setInterval(function () {
+        switch(dir){
             case 37:
-                box.style.left=box.offsetLeft-100+"px";
+                box.style.left=box.offsetLeft-speed+"px";
                 break;
             case 38:
-                box.style.top=box.offsetTop-100+"px";
+                box.style.top=box.offsetTop-speed+"px";
                 break;
             case 39:
-                box.style.left=box.offsetLeft+100+"px";
+                box.style.left=box.offsetLeft+speed+"px";
                 break;
             case 40:
-                box.style.top=box.offsetTop +100+"px";
+                box.style.top=box.offsetTop +speed+"px";
                 break;
-
         }
-    }
+    },30)
+
+
 </script>
 </body>
 </html>
