@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>31. 轮播图</title>
+    <style>
+        *{margin: 0;padding: 0}
+        #outer{
+            width: 355px;
+            height: 480px;
+            margin: 0 auto;
+            background-color: #000000;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        #imgList{
+            list-style: none;
+            width: 2075px;
+            position: absolute;
+            left: 0;
+        }
+        li{
+            float: left;
+            margin: 0 30px;
+        }
+        #navDiv{
+            position: absolute;
+            bottom: 15px;
+            left: 100px;
+        }
+        #navDiv a{
+            float: left;
+            width: 10px;
+            height: 10px;
+            background-color: #cccccc;
+            margin:0 10px;
+            opacity: 0.5;
+            filter:alpha(opacity=50); /*兼容LE8*/
+
+        }
+        #navDiv a:hover{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="img/轮播1.jpg" ></li>
+            <li><img src="img/轮播2.jpg" ></li>
+            <li><img src="img/轮播3.jpg" ></li>
+            <li><img src="img/轮播4.jpg" ></li>
+            <li><img src="img/轮播5.jpg" ></li>
+        </ul>
+        <div id="navDiv">
+            <a href="javascript:"></a>
+            <a href="javascript:"></a>
+            <a href="javascript:"></a>
+            <a href="javascript:"></a>
+            <a href="javascript:"></a>
+        </div>
+    </div>
+
+
+    <script>
+//        设置图片容器宽度，浮动不换行
+        var imgList=document.getElementById("imgList");
+        var imgArr=document.getElementsByTagName("img");
+        imgList.style.width=355*imgArr.length+200+"px";
+//        设置导航居中 ,导航样式
+        var navDiv=document.getElementById("navDiv");
+        var outer=document.getElementById("outer");
+        navDiv.style.left=(outer.offsetWidth-navDiv.offsetWidth)/2+"px";
+
+        var index=0;
+        var allA=document.getElementsByTagName("a");
+        allA[index].style.backgroundColor="black";
+//         点击导航栏变换图片
+        for(i=0;i<allA.length;i++){
+            allA[i].num=i; //给做标记,不然绑定函数之后i在单击响应里只能取到最后一个数
+            allA[i].onclick=function () {
+              index= this.num;
+//              imgList.style.left=-385*index +"px";
+              setA();
+              move(imgList,"left",-385*index,20);
+            };
+        }
+        function setA(){
+            for(i=0;i<allA.length;i++){
+                allA[i].style.backgroundColor="";  //该设置为内联样式，覆盖了hover所以设为空
+            }
+            allA[index].style.backgroundColor="#000";
+        }
+
+
+function getStyle(obj,name){
+    if(window.getComputedStyle){ //不加window是变量找不着就报错，加了window是属性找不到就返回undefined；
+        return getComputedStyle(obj,null)[name]; //这里采用[]传入参数，如果使用.name就固定了只能得到name属性
+    }else{
+        return obj.currentStyle[name];
+    }
+}
+//    obj：对象 attr：被改变的样式 target：目标位置  speed：速度
+function move(obj,attr,target,speed,callback) {
+    clearInterval(obj.timer);
+    var current=parseInt(getStyle(obj,attr));
+    if(current>target){
+        speed=-speed;
+    }
+//       向执行动画的对象中添加属性timer，用来保存定时器的标识
+    obj.timer=setInterval(function () {
+        var oldValue=parseInt(getStyle(obj,attr));
+        var newValue=oldValue+speed;
+        if((speed<0&&newValue<target) || (speed>0&&newValue>target)){
+            newValue=target;
+        }   // 每过一段时间移动固定距离，使最后一步恰好过线
+        obj.style[attr]=newValue+"px";
+//            到达终点:
+        if(newValue===target){
+            clearInterval(obj.timer);
+            callback&&callback();                 //有这个参数才执行，不然没输入参数报错
+        }
+    },30);
+}
+
+
+    </script>
+</body>
+</html>

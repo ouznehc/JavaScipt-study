@@ -42,6 +42,9 @@
     var btn=document.getElementById("btn");
     var btn2=document.getElementById("btn2");
 
+
+
+//  创建move函数
     function getStyle(obj,name){
         if(window.getComputedStyle){ //不加window是变量找不着就报错，加了window是属性找不到就返回undefined；
             return getComputedStyle(obj,null)[name]; //这里采用[]传入参数，如果使用.name就固定了只能得到name属性
@@ -49,8 +52,6 @@
             return obj.currentStyle[name];
         }
     }
-
-//  创建move函数
 //    obj：对象 attr：被改变的样式 target：目标位置  speed：速度
     function move(obj,attr,target,speed,callback) {
         clearInterval(obj.timer);
