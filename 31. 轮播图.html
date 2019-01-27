@@ -16,7 +16,7 @@
         }
         #imgList{
             list-style: none;
-            width: 2075px;
+            width: 2050px;
             position: absolute;
             left: 0;
         }
@@ -52,6 +52,7 @@
             <li><img src="img/轮播3.jpg" ></li>
             <li><img src="img/轮播4.jpg" ></li>
             <li><img src="img/轮播5.jpg" ></li>
+            <li><img src="img/轮播1.jpg" ></li>
         </ul>
         <div id="navDiv">
             <a href="javascript:"></a>
@@ -64,7 +65,7 @@
 
 
     <script>
-//        设置图片容器宽度，浮动不换行
+//        设置图片容器宽度，使浮动不换行
         var imgList=document.getElementById("imgList");
         var imgArr=document.getElementsByTagName("img");
         imgList.style.width=355*imgArr.length+200+"px";
@@ -80,13 +81,29 @@
         for(i=0;i<allA.length;i++){
             allA[i].num=i; //给做标记,不然绑定函数之后i在单击响应里只能取到最后一个数
             allA[i].onclick=function () {
+                clearInterval(timer);
               index= this.num;
-//              imgList.style.left=-385*index +"px";
               setA();
-              move(imgList,"left",-385*index,20);
+              move(imgList,"left",-385*index,20,autoChange())
             };
         }
+        autoChange();
+        var timer;
+        function autoChange() {
+        //           开启定时器
+            timer=setInterval(function () {
+                index++;
+                index %= imgArr.length;  //循环起来使得
+                move(imgList,"left",-385*index,20,setA())
+            },1000);
+
+        }
+//      设置导航栏
         function setA(){
+            if(index>=imgArr.length-1){
+                index=0;
+                imgList.style.left=0;
+        }
             for(i=0;i<allA.length;i++){
                 allA[i].style.backgroundColor="";  //该设置为内联样式，覆盖了hover所以设为空
             }
@@ -94,6 +111,13 @@
         }
 
 
+
+
+
+
+
+
+//        move函数建立向某个方向运动
 function getStyle(obj,name){
     if(window.getComputedStyle){ //不加window是变量找不着就报错，加了window是属性找不到就返回undefined；
         return getComputedStyle(obj,null)[name]; //这里采用[]传入参数，如果使用.name就固定了只能得到name属性
