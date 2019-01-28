@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类</title>
+    <style>
+        .b1{
+            height: 100px;
+            width: 100px;
+            background-color: #cccccc;
+        }
+        .b2{
+            height: 200px;
+            width: 200px;
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+        <button id="btn">修改BOX的样式</button>
+        <br><br>
+        <div id="box" class="b1"></div>
+
+
+        <script>
+            box=document.getElementById("box");
+            btn=document.getElementById("btn");
+            btn.onclick=function () {
+//                box.style.width="200px";
+//                box.style.height="200px";
+//                box.style.backgroundColor="#000"
+//                不要用上面的方法,直接操作class
+                toggleClass(box,"b2");
+            };
+
+//            定义一个函数给元素添加class
+            function addClass(obj,cn) {
+                if(!hasClass(obj,cn)){
+                    obj.className +=" b2" //一定要加上空格把两个class 分开
+                }
+            }
+//            判断一个函数中是否有指定的class 避免重复添加
+            function hasClass(obj,cn) {
+                var reg=new RegExp("\\b"+cn+"\\b");  //  \b直接表示独立单词\b
+                return reg.test(obj.className);
+            }
+
+//            删除指定的class
+            function removeClass(obj,cn) {
+                var reg=new RegExp("\\b"+cn+"\\b");
+                obj.className=obj.className.replace(reg,"");
+            }
+
+//           切换一个类，具有该类删除，没有该类就添加
+            function toggleClass(obj,cn) {
+                if(hasClass(obj,cn)){
+                    removeClass(obj,cn);
+                }else{
+                    addClass(obj,cn);
+                }
+            }
+        </script>
+</body>
+</html>
