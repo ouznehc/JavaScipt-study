@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON</title>
+</head>
+<body>
+
+<script>
+
+    //JSON=JavaScript Object Notation JS对象表示法
+    // JSON就是一特殊字符串 如下面的obj、obj2就是JSON,任意语音可以识别
+    var obj='{"name":"孙悟空","age":"18","gender":"男"}';
+    var obj2='[1,2,3,"hello",true]';
+    console.log(typeof obj);
+    document.write(obj);
+    document.write("<br>");
+    // JSON方法转化为JS对象
+    var o= JSON.parse(obj);
+    console.log(o.name);
+    document.write(o);
+    document.write("<br>");
+    //JS对象转化为JSON
+    obj3={name:"猪八戒",age:18,gender:"男"};
+    var str=JSON.stringify(obj3);
+    document.write(str);
+</script>
+
+</body>
+</html>
