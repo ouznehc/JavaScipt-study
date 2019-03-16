@@ -1,6 +1,6 @@
  # JavaScript （基础学习了解）
  
- ##更加深入的学习参看 Full-Stack-Engineer 仓库以及说明
+ ## 更加深入的学习参看 Full-Stack-Engineer 仓库以及说明
 一步一步的学习之路，前面18章在word 文档中
 
 目录
